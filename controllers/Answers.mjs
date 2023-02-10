@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Questions from "../models/Questions.js";
+import Questions from "../models/Questions.mjs";
 
 export const postAnswer = async(req, res) => {
     const { id: _id } = req.params;

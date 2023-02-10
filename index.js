@@ -1,15 +1,15 @@
-import express from "express";
-import mongoose, { mongo } from "mongoose";
+import express, { json, urlencoded } from "express";
+import { mongoose } from "mongoose";
 import cors from "cors";
-import dotenv from "dotenv";
-import userRoutes from "./routes/users.js";
-import questionRoutes from "./routes/Questions.js";
-import answerRoutes from "./routes/Answers.js";
+import { config } from "dotenv";
+import userRoutes from "./routes/users.mjs";
+import questionRoutes from "./routes/Questions.mjs";
+import answerRoutes from "./routes/Answers.mjs";
 
 const app = express();
-dotenv.config();
-app.use(express.json({ limit: "30mb", extended: true }));
-app.use(express.urlencoded({ limit: "30mb", extended: true }));
+config();
+app.use(json({ limit: "30mb", extended: true }));
+app.use(urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.get("/", (req, res) => {

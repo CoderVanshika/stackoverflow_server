@@ -1,4 +1,4 @@
-import Questions from '../models/Questions.js'
+import Questions from '../models/Questions.mjs'
 import mongoose from 'mongoose'
 
 export const AskQuestion = async (req, res) => {

@@ -1,7 +1,7 @@
 import express from 'express'
 
-import { postAnswer, deleteAnswer } from "../controllers/Answers.js"
-import auth from '../middlewares/auth.js'
+import { postAnswer, deleteAnswer } from "../controllers/Answers.mjs"
+import auth from '../middlewares/auth.mjs'
 
 const router = express.Router()
 
