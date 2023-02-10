@@ -2,9 +2,9 @@ import express from 'express'
 import mongoose, { mongo } from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import userRoutes from './routes/users.js'
-import questionRoutes from './routes/Questions.js'
-import answerRoutes from './routes/Answers.js'
+import userRoutes from './routes/users.mjs'
+import questionRoutes from './routes/Questions.mjs'
+import answerRoutes from './routes/Answers.mjs'
 
 const app = express();
 dotenv.config();
