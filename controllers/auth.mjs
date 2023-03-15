@@ -26,6 +26,10 @@ export const login = async (req,res) => {
     const { email, password} = req.body;
     try {
         const existinguser = await users.findOne({ email });
+        /*if(existinguser)
+        {
+            const otp = Math.floor( Math.random() * 1000000)
+        }*/
         if(!existinguser){
             return res.status(404).json({message:"User Don't Exist"})
            }
@@ -34,6 +38,7 @@ export const login = async (req,res) => {
             return res.status(400).json({message: "Invalid credentials"})
         }
        
+        //user = await User.create({ email,password, otp})
         //const token = jwt.sign({ email: existinguser.email, id:existinguser._id}, "test", { expiresIn: '1h'});
         const token = jwt.sign({ email: existinguser.email, id:existinguser._id}, process.env.JWT_SECRET, { expiresIn: '1h'});
         res.status(200).json({ result: existinguser, token })

@@ -1,11 +1,23 @@
 import Questions from '../models/Questions.mjs'
 import mongoose from 'mongoose'
+import Payments from '../models/Payment.mjs';
 
 export const AskQuestion = async (req, res) => {
     const postQuestionData = req.body;
+    const {questionTitle, questionBody, questionTags, userPosted, userId, noOfQuestions} = req.body
+    //console.log("User id:",userId)
+    const paidUserList = await Payments.findOne({userId});
+    {
+        //console.log("Paid user list:",paidUserList)
+        paidUserList.noOfQuestions=noOfQuestions
+
+        //console.log("Questions:", noOfQuestions, "Paid list:",paidUserList)
+        await Payments.findByIdAndUpdate(paidUserList._id,paidUserList)
+    }
     //const userId = req.userId;
     //const postQuestion = new Questions({ ...postQuestionData, userId});
-    const postQuestion = new Questions(postQuestionData);
+    const postQuestion = new Questions({questionTitle, questionBody, questionTags, userPosted, userId });
+
     try {
         await postQuestion.save();
         res.status(200).json("Posted a question successfully")
@@ -14,6 +26,8 @@ export const AskQuestion = async (req, res) => {
         res.status(409).json("Couldn't post a new question")        
     }
 }
+
+
 
 export const getAllQuestions = async (req, res) => {
     try {
@@ -25,6 +39,7 @@ export const getAllQuestions = async (req, res) => {
     }
 
 }
+
 
 export const deleteQuestion = async (req, res) => {
     const { id:_id } = req.params;
