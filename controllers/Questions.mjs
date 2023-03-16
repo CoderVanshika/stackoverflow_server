@@ -19,6 +19,7 @@ export const AskQuestion = async (req, res) => {
     const postQuestion = new Questions({questionTitle, questionBody, questionTags, userPosted, userId });
 
     try {
+        console.log("Server side controller:", postQuestion)
         await postQuestion.save();
         res.status(200).json("Posted a question successfully")
     } catch (error) {
